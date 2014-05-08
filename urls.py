@@ -1,8 +1,10 @@
 import tornado.web
 from handlers.test_handler import TestHandler
+from handlers.login_handler import SignUpHandler
 
 application = tornado.web.Application([
     (r"/", TestHandler),
+    (r"/signup", SignUpHandler),
 ])
 
 if __name__ == "__main__":

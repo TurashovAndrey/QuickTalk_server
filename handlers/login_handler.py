@@ -3,6 +3,9 @@ import simplejson
 from helpers.helper_functions import *
 from models.user_model import UserModel
 from models.database_structure import *
+import uuid
+import arrow
+import bcrypt
 
 
 class SignUpHandler(tornado.web.RequestHandler):
@@ -11,9 +14,12 @@ class SignUpHandler(tornado.web.RequestHandler):
             response = dict()
             user = dict()
 
-            args = simplejson.loads(self.request.body)
-            email = get_json_argument('email', None)
-            password = get_json_argument('password', None)
+            username = get_json_argument(self.request.body, 'username', None)
+            password = get_json_argument(self.request.body,'password', None)
+            email = u"test@test.com"
+            first_name = ""
+            last_name = ""
+            telephone = ""
 
             if email is None or password is None:
                 raise Exception('Need username, password to create user.')
@@ -22,9 +28,25 @@ class SignUpHandler(tornado.web.RequestHandler):
                 raise Exception('Password must be greater than 8 symbols')
 
             u = UserModel().get_user(email=email)
-            if isinstance(u, User) and u.user_id is not None:
+            if isinstance(u, UserModel) and u.user_id is not None:
                 raise Exception('User with email %s already exists' % email)
 
+            user_id = uuid.uuid4()
+            created = arrow.utcnow().timestamp
+
+            hashed = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt(11))
+            hashed = unicode(hashed)
+
+            user['user_id'] = user_id
+            user['username'] = username
+            user['hashed_pw'] = hashed
+            user['first_name'] = first_name
+            user['last_name'] = last_name
+            user['email'] = email
+            user['created'] = created
+            user['updated'] = created
+            user['telephone'] = telephone
+
+            UserModel().create_user(**user)
         except Exception, e:
-            self.write_exception(e)
-            self.finish()
+            pass
