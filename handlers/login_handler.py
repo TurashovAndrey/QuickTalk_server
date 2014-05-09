@@ -67,3 +67,17 @@ class LoginHandler(tornado.web.RequestHandler):
             self.write_exception(e)
             self.finish()
 
+class LogoutHandler(tornado.web.RequestHandler):
+    def post(self):
+        try:
+            #if self.session:
+            #    self.session.clear()
+            #    self.clear_cookie('sid', "/", self.settings["cookie_domain"])
+
+            response = dict()
+            response.update(success={'code': 1})
+            self.write(response)
+
+        except Exception, e:
+            self.write_exception(e)
+
