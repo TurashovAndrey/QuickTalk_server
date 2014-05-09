@@ -1,14 +1,14 @@
-import tornado.web
-import simplejson
+from base_handler import BaseHandler
 from helpers.helper_functions import *
 from models.user_model import UserModel
 from models.database_structure import *
 import uuid
 import arrow
 import bcrypt
+from helpers.session import Session
 
 
-class SignUpHandler(tornado.web.RequestHandler):
+class SignUpHandler(BaseHandler):
     def post(self):
         try:
             response = dict()
@@ -51,9 +51,10 @@ class SignUpHandler(tornado.web.RequestHandler):
         except Exception, e:
             pass
 
-class LoginHandler(tornado.web.RequestHandler):
+class LoginHandler(BaseHandler):
     def post(self):
         try:
+            response = dict()
             username = get_json_argument(self.request.body, "username", None)
             password = get_json_argument(self.request.body, "password", None)
 
@@ -63,11 +64,23 @@ class LoginHandler(tornado.web.RequestHandler):
             user = UserModel().check_password(username, password)
             if user is None:
                 raise Exception(u"Invalid username or password!")
+
+            sid = self.session.sessionid
+            session = Session(self.application.session_store, sid)
+            session['username'] = user.username
+            session['user_id'] = user.user_id
+            session['first_name'] = user.first_name
+            session['last_name'] = user.last_name
+            self.set_secure_cookie('sid', sid, expires_days=30, domain="test.com")
+            response['token'] = unicode(user.user_id)
+
+            self.write(response)
+
         except Exception, e:
             self.write_exception(e)
             self.finish()
 
-class LogoutHandler(tornado.web.RequestHandler):
+class LogoutHandler(BaseHandler):
     def post(self):
         try:
             #if self.session:
