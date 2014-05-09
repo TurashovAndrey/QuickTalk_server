@@ -1,6 +1,7 @@
 from database_structure import User
 from db import *
 import uuid
+import bcrypt
 
 class UserModel():
     def get_user(self, email):
@@ -36,3 +37,12 @@ class UserModel():
         db.store.add(u)
 
         db.store.commit()
+
+    def check_password(self, username, password):
+        db = Database()
+        users = db.store.find(User, User.username.lower() == username.lower())
+        for user in users:
+            if bcrypt.hashpw(password.encode('utf-8'), user.hashed_pw.encode('utf-8')) == user.hashed_pw:
+                return user
+
+        return None

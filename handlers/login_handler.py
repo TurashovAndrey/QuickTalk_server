@@ -50,3 +50,20 @@ class SignUpHandler(tornado.web.RequestHandler):
             UserModel().create_user(**user)
         except Exception, e:
             pass
+
+class LoginHandler(tornado.web.RequestHandler):
+    def post(self):
+        try:
+            username = get_json_argument(self.request.body, "username", None)
+            password = get_json_argument(self.request.body, "password", None)
+
+            if username is None or password is None:
+                raise Exception(u"You must supply a username and password.")
+
+            user = UserModel().check_password(username, password)
+            if user is None:
+                raise Exception(u"Invalid username or password!")
+        except Exception, e:
+            self.write_exception(e)
+            self.finish()
+
