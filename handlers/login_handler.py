@@ -71,7 +71,7 @@ class LoginHandler(BaseHandler):
             session['user_id'] = user.user_id
             session['first_name'] = user.first_name
             session['last_name'] = user.last_name
-            self.set_secure_cookie('sid', sid, expires_days=30, domain="test.com")
+            self.set_secure_cookie('sid', sid, expires_days=30, domain="fahlo.loc")
             response['token'] = unicode(user.user_id)
 
             self.write(response)
@@ -83,9 +83,9 @@ class LoginHandler(BaseHandler):
 class LogoutHandler(BaseHandler):
     def post(self):
         try:
-            #if self.session:
-            #    self.session.clear()
-            #    self.clear_cookie('sid', "/", self.settings["cookie_domain"])
+            if self.session:
+                self.session.clear()
+                self.clear_cookie('sid', "/", self.settings["cookie_domain"])
 
             response = dict()
             response.update(success={'code': 1})

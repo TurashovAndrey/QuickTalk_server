@@ -9,15 +9,15 @@ class Application(tornado.web.Application):
     def __init__(self):
         handlers = [
             (r"/", TestHandler),
-            (r"/signup", SignUpHandler),
-            (r"/login", LoginHandler),
-            (r"/logout", LogoutHandler)
+            (r"/leasing/signup", SignUpHandler),
+            (r"/leasing/login", LoginHandler),
+            (r"/leasing/logout", LogoutHandler)
         ]
         settings = dict(
             debug=True,
             login_url="/login",
             cookie_secret="yVJwZeaTRN+RNaFJ8cXVuacVBDsvSEZjqqg9tzaXTI0=",
-            cookie_domain="test.com"
+            cookie_domain="fahlo.loc"
         )
 
         tornado.web.Application.__init__(self, handlers, **settings)
