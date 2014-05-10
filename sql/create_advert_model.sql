@@ -106,9 +106,38 @@ WITH (
 ALTER TABLE leasing_group
   OWNER TO leasing;
 
+CREATE TABLE leasing_advert_types
+(
+  id serial NOT NULL,
+  category_id integer NOT NULL,
+  type_name VARCHAR(255),
+  CONSTRAINT leasing_advert_types_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+
+ALTER TABLE leasing_advert_types
+  OWNER TO fahlo;
+
+CREATE TABLE leasing_advert_categories
+(
+  id serial NOT NULL,
+  category_name VARCHAR(255),
+  CONSTRAINT leasing_advert_categories_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+
+ALTER TABLE leasing_advert_categories
+  OWNER TO fahlo;
+
+ALTER TABLE leasing_advert_types
+    ADD CONSTRAINT leasing_advert_types_category_id_fkey FOREIGN KEY (category_id) REFERENCES leasing_advert_categories(id);
 
 ALTER TABLE leasing_advert
-    ADD CONSTRAINT leasing_advert_type_id_fkey FOREIGN KEY (type_id) REFERENCES leasing_advert(id);
+    ADD CONSTRAINT leasing_advert_type_id_fkey FOREIGN KEY (type_id) REFERENCES leasing_advert_types(id);
 
 ALTER TABLE leasing_advert
     ADD CONSTRAINT leasing_advert_group_id_fkey FOREIGN KEY (group_id) REFERENCES leasing_group(id);

@@ -15,3 +15,71 @@ class User(object):
     updated_ip = Unicode()
     birthday = Date()
     hometown = Unicode()
+
+class AdvertCategories(object):
+    __storm_table__ = "leasing_advert_categories"
+    id = Int(primary=True)
+    category_name = Unicode()
+    order_num = Int()
+
+class AdvertTypes(object):
+    __storm_table__ = "leasing_advert_types"
+    id = Int(primary=True)
+    category_id = Int()
+    type_name = Unicode()
+    url = Unicode()
+    order_num = Int()
+
+class Advert(object):
+    __storm_table__ = "leasing_advert"
+    id = Int(primary=True)
+    advert_id = UUID()
+    title = Unicode()
+    description = Unicode()
+    type_id = Int()
+    status_id = Int()
+    created_by = UUID()
+    updated_by = UUID()
+
+class AdvertLocations(object):
+    __storm_table__ = "leasing_advert_locations"
+    id = Int(primary=True)
+    advert_id = UUID()
+    location = Unicode()
+    latitude = Decimal()
+    longitude = Decimal()
+    is_pickup_location = Bool()
+
+class Statuses(object):
+    __storm_table__ = "leasing_statuses"
+    id = Int(primary=True)
+    status = Unicode()
+
+class AdvertGroups(object):
+    __storm_table__ = "leasing_advert_groups"
+    id = Int(primary=True)
+    advert_id = UUID()
+    group_id = Int()
+
+class AdvertUserGroups(object):
+    __storm_table__ = "leasing_advert_user_groups"
+    id = Int(primary=True)
+    advert_id = UUID()
+    group_id = Int()
+    user_id = UUID()
+
+class AdvertItems(object):
+    __storm_table__ = "leasing_advert_items"
+    id = Int(primary=True)
+    advert_id = UUID()
+    item_id = UUID()
+
+
+class Locations(object):
+    __storm_table__ = "leasing_locations"
+    id = Int(primary=True)
+    hub_id = UUID()
+    location = Unicode()
+    latitude = Decimal()
+    longitude = Decimal()
+
