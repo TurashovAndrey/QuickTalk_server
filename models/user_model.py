@@ -3,15 +3,12 @@ from db import *
 import uuid
 import bcrypt
 
-class UserModel():
+class UserModel(Database):
     def get_user(self, email):
-        db = Database()
-        user = db.store.find(User, User.email == email).one()
+        user = self.store.find(User, User.email == email).one()
         return user
 
     def create_user(self, **kw):
-        db = Database()
-
         #kw['user_id'] = uuid.UUID(kw['user_id'])
         u = User()
         u.user_id = kw['user_id']
@@ -34,13 +31,12 @@ class UserModel():
         #u.is_active = True
         #u.is_deleted = False
 
-        db.store.add(u)
+        self.store.add(u)
 
-        db.store.commit()
+        self.store.commit()
 
     def check_password(self, username, password):
-        db = Database()
-        users = db.store.find(User, User.username.lower() == username.lower())
+        users = self.store.find(User, User.username.lower() == username.lower())
         for user in users:
             if bcrypt.hashpw(password.encode('utf-8'), user.hashed_pw.encode('utf-8')) == user.hashed_pw:
                 return user
