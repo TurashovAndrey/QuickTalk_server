@@ -1,6 +1,6 @@
 from base_handler import BaseHandler
 from helpers.helper_functions import *
-from models.advert_model import AdvertModel
+from models.advert_model import AdvertModel,AdvertCategoriesHandler
 
 
 class AdvertHandler(BaseHandler):
@@ -26,5 +26,11 @@ class AdvertHandler(BaseHandler):
                                     type_id = type_id,
                                     group_id = group_id)
 
+
+class AdvertCategoriesHandler(BaseHandler):
+    def get(self):
+        categories = AdvertCategoriesHandler().get_advert_categories()
+
+        response = dict()
 
 

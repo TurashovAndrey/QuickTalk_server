@@ -29,3 +29,11 @@ class AdvertModel(Database):
 
     def delete_advert(self, advert_id):
         advert = self.store.find(Advert, Advert.advert_id == advert_id).remove()
+
+
+class AdvertCategoriesHandler(Database):
+    def get_advert_categories(self):
+        categories = self.store.find(AdvertCategories)
+        return categories
+
+
