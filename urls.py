@@ -1,6 +1,6 @@
 import tornado.web
 from handlers.test_handler import TestHandler
-from handlers.login_handler import SignUpHandler, LoginHandler, LogoutHandler
+from handlers.login_handler import SignUpHandler, LoginHandler, LogoutHandler, ProfileHandler
 from handlers.advert_handler import AdvertHandler
 import redis
 from helpers.session import RedisSessionStore
@@ -13,6 +13,7 @@ class Application(tornado.web.Application):
             (r"/leasing/signup", SignUpHandler),
             (r"/leasing/login", LoginHandler),
             (r"/leasing/logout", LogoutHandler),
+            (r"/leasing/updateProfile", ProfileHandler),
             (r"/leasing/getAdvert", AdvertHandler),
             (r"/leasing/createAdvert", AdvertHandler)
         ]

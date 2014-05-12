@@ -94,3 +94,26 @@ class LogoutHandler(BaseHandler):
         except Exception, e:
             self.write_exception(e)
 
+class ProfileHandler(BaseHandler):
+    def post(self):
+        try:
+            response = dict()
+
+            kw = dict()
+            kw['user_id'] = self.session['user_id']
+            kw['username'] = get_json_argument(self.request.body, "username", None)
+            kw['first_name'] = get_json_argument(self.request.body, "first_name", None)
+            kw['last_name'] = get_json_argument(self.request.body, "last_name", None)
+            kw['email'] = get_json_argument(self.request.body, "email", None)
+            kw['telephone'] = get_json_argument(self.request.body, "telephone", None)
+
+            UserModel().update_user(**kw)
+
+            response.update(success={'code': 1})
+            self.write(response)
+
+        except Exception, e:
+            self.write_exception(e)
+            self.finish()
+
+

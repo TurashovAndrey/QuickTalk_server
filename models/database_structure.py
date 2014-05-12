@@ -15,6 +15,7 @@ class User(object):
     updated_ip = Unicode()
     birthday = Date()
     hometown = Unicode()
+    telephone = Unicode()
 
 class AdvertCategories(object):
     __storm_table__ = "leasing_advert_categories"
