@@ -26,3 +26,5 @@ WITH (
 );
 ALTER TABLE leasing_user
   OWNER TO leasing;
+
+CREATE UNIQUE INDEX leasing_user_user_id_idx ON leasing_user(user_id);

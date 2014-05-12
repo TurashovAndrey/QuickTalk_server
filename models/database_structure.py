@@ -75,7 +75,6 @@ class AdvertItems(object):
     advert_id = UUID()
     item_id = UUID()
 
-
 class Locations(object):
     __storm_table__ = "leasing_locations"
     id = Int(primary=True)
@@ -83,4 +82,10 @@ class Locations(object):
     location = Unicode()
     latitude = Decimal()
     longitude = Decimal()
+
+class Request(object):
+    __storm_table__ = "leasing_request"
+    id = Int(primary=True)
+    advert_id = UUID()
+    user_id = UUID()
 
