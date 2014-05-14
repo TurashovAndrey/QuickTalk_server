@@ -89,3 +89,9 @@ class Request(object):
     advert_id = UUID()
     user_id = UUID()
 
+class UserComment(object):
+    __storm_table__ = "leasing_user_comment"
+    id = Int(primary=True)
+    user_id = UUID()
+    from_user_id = UUID()
+    description = Unicode()
