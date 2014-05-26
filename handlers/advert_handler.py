@@ -1,11 +1,12 @@
 from base_handler import BaseHandler
 from helpers.helper_functions import *
-from models.advert_model import AdvertModel,AdvertCategoriesHandler
+from models.advert_model import AdvertModel
 
 
 class AdvertHandler(BaseHandler):
     def get(self):
         advert_id = self.get_argument('advert_id', None)
+        advert_id = 'd801d00f-0ca6-4069-a0fb-73277a449b57'
         advert = AdvertModel().get_advert(advert_id)
 
         response = dict()
@@ -29,8 +30,16 @@ class AdvertHandler(BaseHandler):
 
 class AdvertCategoriesHandler(BaseHandler):
     def get(self):
-        categories = AdvertCategoriesHandler().get_advert_categories()
+        categories = AdvertModel().get_advert_categories()
+        response = []
 
-        response = dict()
+        for category in categories:
+            cat = dict()
+            cat['id'] = category.id
+            cat['name'] = category.category_name
+
+            response.append(cat)
+
+        self.write({"categories":response})
 
 

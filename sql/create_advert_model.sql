@@ -118,7 +118,7 @@ WITH (
 );
 
 ALTER TABLE leasing_advert_types
-  OWNER TO fahlo;
+  OWNER TO leasing;
 
 CREATE TABLE leasing_advert_categories
 (
@@ -131,7 +131,7 @@ WITH (
 );
 
 ALTER TABLE leasing_advert_categories
-  OWNER TO fahlo;
+  OWNER TO leasing;
 
 ALTER TABLE leasing_advert_types
     ADD CONSTRAINT leasing_advert_types_category_id_fkey FOREIGN KEY (category_id) REFERENCES leasing_advert_categories(id);
