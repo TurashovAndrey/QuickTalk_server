@@ -14,12 +14,8 @@ class SignUpHandler(BaseHandler):
             response = dict()
             user = dict()
 
-            username = get_json_argument(self.request.body, 'username', None)
+            email = get_json_argument(self.request.body, 'email', None)
             password = get_json_argument(self.request.body,'password', None)
-            email = u"test@test.com"
-            first_name = ""
-            last_name = ""
-            telephone = ""
 
             if email is None or password is None:
                 raise Exception('Need username, password to create user.')
@@ -38,18 +34,14 @@ class SignUpHandler(BaseHandler):
             hashed = unicode(hashed)
 
             user['user_id'] = user_id
-            user['username'] = username
             user['hashed_pw'] = hashed
-            user['first_name'] = first_name
-            user['last_name'] = last_name
             user['email'] = email
             user['created'] = created
             user['updated'] = created
-            user['telephone'] = telephone
 
             UserModel().create_user(**user)
         except Exception, e:
-            pass
+            self.write_exception(e)
 
 class LoginHandler(BaseHandler):
     def post(self):
