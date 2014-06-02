@@ -7,11 +7,10 @@ from base_handler import is_authenticated
 class AdvertHandler(BaseHandler):
     def get(self):
         advert_id = self.get_argument('advert_id', None)
-        advert_id = 'd801d00f-0ca6-4069-a0fb-73277a449b57'
         advert = AdvertModel().get_advert(advert_id)
 
         response = dict()
-        #response['advert_id'] = advert.advert_id
+        response['advert_id'] = advert.advert_id
         response['description'] = advert.description
         response['title'] = advert.title
 
