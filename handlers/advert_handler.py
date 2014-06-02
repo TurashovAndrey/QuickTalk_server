@@ -17,6 +17,7 @@ class AdvertHandler(BaseHandler):
 
         self.write(response)
 
+    @is_authenticated
     def post(self):
         title = get_json_argument(self.request.body, 'title', None)
         description = get_json_argument(self.request.body, 'description', None)
@@ -30,7 +31,6 @@ class AdvertHandler(BaseHandler):
 
 
 class AdvertCategoriesHandler(BaseHandler):
-    @is_authenticated
     def get(self):
         categories = AdvertModel().get_advert_categories()
         response = []
