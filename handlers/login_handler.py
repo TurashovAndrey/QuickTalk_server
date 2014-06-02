@@ -11,7 +11,6 @@ from helpers.session import Session
 class SignUpHandler(BaseHandler):
     def post(self):
         try:
-            response = dict()
             user = dict()
 
             email = get_json_argument(self.request.body, 'email', None)
@@ -47,20 +46,20 @@ class LoginHandler(BaseHandler):
     def post(self):
         try:
             response = dict()
-            username = get_json_argument(self.request.body, "username", None)
+            email = get_json_argument(self.request.body, "email", None)
             password = get_json_argument(self.request.body, "password", None)
 
-            if username is None or password is None:
+            if email is None or password is None:
                 raise Exception(u"You must supply a username and password.")
 
-            user = UserModel().check_password(username, password)
+            user = UserModel().check_password(email, password)
             if user is None:
                 raise Exception(u"Invalid username or password!")
 
             sid = self.session.sessionid
             session = Session(self.application.session_store, sid)
             session['username'] = user.username
-            session['user_id'] = user.user_id
+            session['user'] = user.user_id
             session['first_name'] = user.first_name
             session['last_name'] = user.last_name
             self.set_secure_cookie('sid', sid, expires_days=30, domain="fahlo.loc")

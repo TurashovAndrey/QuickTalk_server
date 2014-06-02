@@ -1,6 +1,7 @@
 from base_handler import BaseHandler
 from helpers.helper_functions import *
 from models.advert_model import AdvertModel
+from base_handler import is_authenticated
 
 
 class AdvertHandler(BaseHandler):
@@ -29,6 +30,7 @@ class AdvertHandler(BaseHandler):
 
 
 class AdvertCategoriesHandler(BaseHandler):
+    @is_authenticated
     def get(self):
         categories = AdvertModel().get_advert_categories()
         response = []

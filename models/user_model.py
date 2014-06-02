@@ -38,8 +38,8 @@ class UserModel(Database):
 
         self.store.commit
 
-    def check_password(self, username, password):
-        users = self.store.find(User, User.username.lower() == username.lower())
+    def check_password(self, email, password):
+        users = self.store.find(User, User.email.lower() == email.lower())
         for user in users:
             if bcrypt.hashpw(password.encode('utf-8'), user.hashed_pw.encode('utf-8')) == user.hashed_pw:
                 return user

@@ -1,6 +1,21 @@
 import tornado.web
 from helpers.session import Session
 from tornado.web import *
+import functools
+
+def is_authenticated(method):
+    @functools.wraps(method)
+    def wrapper(self, *args, **kwargs):
+        if not self.current_user:
+            res = {'error': {
+                'code': 403,
+                'message': 'Bad auth token (check auth cookie)'}
+            }
+            self.set_status(res['error']['code'], res['error']['message'])
+            self.write(res)
+            return
+        return method(self, *args, **kwargs)
+    return wrapper
 
 class BaseHandler(tornado.web.RequestHandler):
 
