@@ -43,4 +43,20 @@ class AdvertCategoriesHandler(BaseHandler):
 
         self.write({"categories":response})
 
+class AdvertSubCategoriesHandler(BaseHandler):
+    def get(self):
+        category_id = self.get_argument('category_id', None)
+        sub_categories = AdvertModel().get_advert_sub_categories(category_id)
+        response = []
+
+        for sub_category in sub_categories:
+            sub_cat = dict()
+            sub_cat['id'] = sub_category.id
+            sub_cat['category_id'] = sub_category.category_id
+            sub_cat['name'] = sub_category.sub_category_name
+
+            response.append(sub_cat)
+
+        self.write({"sub_categories":response})
+
 

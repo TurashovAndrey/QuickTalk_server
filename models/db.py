@@ -13,10 +13,6 @@ class Database():
                 Database.store = self.getDB()
 
     def getDB(self):
-        #self._pg_database = create_database("postgres://%s:%s@%s/%s?isolation=read-committed" % (
-        #    options.postgresql_user, options.postgresql_pass,
-        #    options.postgresql_host, options.postgresql_db)
-        #)
         self.database = create_database("postgres://%s:%s@%s/%s?isolation=read-committed" % (
                 "leasing", "1234567","127.0.0.1", "leasing_db")
         )

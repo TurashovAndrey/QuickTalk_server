@@ -1,6 +1,7 @@
 from database_structure import *
 import uuid
 from db import Database
+from helpers.helper_functions import verify_uuid
 
 
 class AdvertModel(Database):
@@ -33,3 +34,7 @@ class AdvertModel(Database):
     def get_advert_categories(self):
         categories = self.store.find(AdvertCategories)
         return categories
+
+    def get_advert_sub_categories(self, category_id):
+        sub_categories = self.store.find(AdvertSubCategories, AdvertSubCategories.category_id == int(category_id))
+        return sub_categories
