@@ -11,3 +11,6 @@ WITH (
 
 ALTER TABLE leasing_advert_sub_categories
   OWNER TO leasing;
+
+ALTER TABLE leasing_advert_sub_categories
+    ADD CONSTRAINT leasing_advert_sub_categories_category_id_fkey FOREIGN KEY (category_id) REFERENCES leasing_advert_categories(id);
