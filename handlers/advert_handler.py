@@ -25,11 +25,18 @@ class AdvertHandler(BaseHandler):
         description = get_json_argument(self.request.body, 'description', None)
         type_id = get_json_argument(self.request.body, 'type_id', None)
         group_id = get_json_argument(self.request.body, 'group_id', None)
+        sub_category_id = get_json_argument(self.request.body, 'sub_category_id', None)
 
         AdvertModel().create_advert(title = title,
                                     description = description,
                                     type_id = type_id,
-                                    group_id = group_id)
+                                    group_id = group_id,
+                                    sub_category_id = sub_category_id,
+                                    user_id = self.session['user_id'])
+
+        response = dict()
+        response.update(success={'code': 1})
+        self.write(response)
 
 
 class AdvertCategoriesHandler(BaseHandler):

@@ -16,7 +16,8 @@ class AdvertModel(Database):
         advert.description = kw['description']
         advert.type_id = int(kw['type_id'])
         advert.group_id = int(kw['group_id'])
-        advert.created_by = uuid.UUID('6e12f572-ed56-43b8-9aaf-a7f08f4ff1af')
+        advert.created_by = kw['user_id']
+        advert.sub_category_id = int(kw['sub_category_id'])
         advert.status_id = 1
 
         self.store.add(advert)
