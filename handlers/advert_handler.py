@@ -13,8 +13,7 @@ class AdvertHandler(BaseHandler):
         response['advert_id'] = str(advert.advert_id)
         response['description'] = advert.description
         response['title'] = advert.title
-        response['created_by'] = str(advert.created_by)
-        response['updated_by'] = str(advert.updated_by)
+        response['created_by'] = str(user.username)
         response['status_id'] = advert.status_id
         response['sub_category_id'] = advert.sub_category_id
 
