@@ -6,7 +6,7 @@ from helpers.helper_functions import verify_uuid
 
 class AdvertModel(Database):
     def get_advert(self, advert_id):
-        advert = self.store.using(Advert,Join(User, Advert.created_by == User.user_id)).find((Advert,User), Advert.advert_id == uuid.UUID(advert_id)).one()
+        advert = self.store.using(Advert,Join(User, Advert.created_by == User.user_id)).find((Advert,User), Advert.advert_id == verify_uuid(advert_id)).one()
         return advert
 
     def create_advert(self, **kw):

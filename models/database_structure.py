@@ -40,6 +40,7 @@ class Advert(object):
     status_id = Int()
     created_by = UUID()
     updated_by = UUID()
+    sub_category_id = Int()
 
 class AdvertLocations(object):
     __storm_table__ = "leasing_advert_locations"
