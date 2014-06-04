@@ -11,6 +11,9 @@ WITH (
 );
 
 ALTER TABLE leasing_user_comment
+  OWNER TO leasing;
+
+ALTER TABLE leasing_user_comment
   OWNER TO fahlo;
 
 ALTER TABLE leasing_user_comment
