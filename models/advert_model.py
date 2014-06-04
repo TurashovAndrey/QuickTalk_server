@@ -18,6 +18,7 @@ class AdvertModel(Database):
         advert.group_id = int(kw['group_id'])
         advert.created_by = kw['user_id']
         advert.sub_category_id = int(kw['sub_category_id'])
+        advert.price = float(kw['price'])
         advert.status_id = 1
 
         self.store.add(advert)
@@ -27,6 +28,12 @@ class AdvertModel(Database):
         advert = self.store.find(Advert, Advert.advert_id == kw['advert_id']).one()
         advert.title = kw['title']
         advert.description = kw['description']
+        advert.type_id = int(kw['type_id'])
+        advert.group_id = int(kw['group_id'])
+        advert.created_by = kw['user_id']
+        advert.sub_category_id = int(kw['sub_category_id'])
+        advert.price = float(kw['price'])
+        advert.status_id = 1
         self.store.commit()
 
     def delete_advert(self, advert_id):

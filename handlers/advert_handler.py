@@ -16,6 +16,7 @@ class AdvertHandler(BaseHandler):
         response['created_by'] = str(user.username)
         response['status_id'] = advert.status_id
         response['sub_category_id'] = advert.sub_category_id
+        response['price'] = advert.price
 
         self.write(response)
 
@@ -26,13 +27,15 @@ class AdvertHandler(BaseHandler):
         type_id = get_json_argument(self.request.body, 'type_id', None)
         group_id = get_json_argument(self.request.body, 'group_id', None)
         sub_category_id = get_json_argument(self.request.body, 'sub_category_id', None)
+        price = get_json_argument(self.request.body, 'price', None)
 
         AdvertModel().create_advert(title = title,
                                     description = description,
                                     type_id = type_id,
                                     group_id = group_id,
                                     sub_category_id = sub_category_id,
-                                    user_id = self.session['user_id'])
+                                    user_id = self.session['user_id'],
+                                    price = price)
 
         response = dict()
         response.update(success={'code': 1})
