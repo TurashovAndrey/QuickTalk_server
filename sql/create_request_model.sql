@@ -10,9 +10,8 @@ WITH (
 );
 
 ALTER TABLE leasing_request
-  OWNER TO fahlo;
-
-
+  OWNER TO leasing;
+                  
 ALTER TABLE leasing_request
     ADD CONSTRAINT leasing_request_request_user_id_fkey FOREIGN KEY (request_user_id) REFERENCES leasing_user(user_id);
 

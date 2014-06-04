@@ -5,20 +5,24 @@ from models.user_comments_model import UserCommentsModel
 
 class UserCommentsHandler(BaseHandler):
     def get(self):
-        user_id = self.get_argument('user_id', None)
-        comments = UserCommentsModel().get_comments(user_id)
-        response = []
+        try:
+            user_id = self.get_argument('user_id', None)
+            comments = UserCommentsModel().get_comments(user_id)
+            response = []
 
-        for comment in comments:
-            user_comment = dict()
-            user_comment['id'] = comment.id
-            user_comment['user_id'] = str(comment.user_id)
-            user_comment['from_user_id'] = str(comment.from_user_id)
-            user_comment['description'] = comment.description
+            for comment in comments:
+                user_comment = dict()
+                user_comment['id'] = comment.id
+                user_comment['user_id'] = str(comment.user_id)
+                user_comment['from_user_id'] = str(comment.from_user_id)
+                user_comment['description'] = comment.description
 
-            response.append(user_comment)
+                response.append(user_comment)
 
-        self.write({"user_comments":response})
+            self.write({"user_comments":response})
+
+        except Exception,e:
+            self.write_exception(e)
 
     def post(self):
         try:

@@ -87,7 +87,7 @@ class Request(object):
     __storm_table__ = "leasing_request"
     id = Int(primary=True)
     advert_id = UUID()
-    user_id = UUID()
+    request_user_id = UUID()
 
 class UserComment(object):
     __storm_table__ = "leasing_user_comment"
