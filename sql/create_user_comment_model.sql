@@ -14,9 +14,6 @@ ALTER TABLE leasing_user_comment
   OWNER TO leasing;
 
 ALTER TABLE leasing_user_comment
-  OWNER TO fahlo;
-
-ALTER TABLE leasing_user_comment
     ADD CONSTRAINT leasing_user_comment_user_id_fkey FOREIGN KEY (user_id) REFERENCES leasing_user(user_id);
 
 ALTER TABLE leasing_user_comment

@@ -101,3 +101,10 @@ class AdvertSubCategories(object):
     id = Int(primary=True)
     category_id = Int()
     sub_category_name = Unicode()
+
+class AdvertComment(object):
+    __storm_table__ = "leasing_advert_comment"
+    id = Int(primary=True)
+    advert_id = UUID()
+    from_user_id = UUID()
+    description = Unicode()

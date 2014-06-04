@@ -2,6 +2,7 @@ import tornado.web
 from handlers.test_handler import TestHandler
 from handlers.login_handler import SignUpHandler, LoginHandler, LogoutHandler, ProfileHandler
 from handlers.advert_handler import AdvertHandler, AdvertCategoriesHandler, AdvertSubCategoriesHandler
+from handlers.advert_comments_handler import AdvertCommentsHandler
 from handlers.user_comments_handler import UserCommentsHandler
 from handlers.request_handler import RequestHandler
 import redis
@@ -23,7 +24,9 @@ class Application(tornado.web.Application):
             (r"/leasing/getUserComments", UserCommentsHandler),
             (r"/leasing/createUserComment", UserCommentsHandler),
             (r"/leasing/getRequests", RequestHandler),
-            (r"/leasing/createRequest", RequestHandler)
+            (r"/leasing/createRequest", RequestHandler),
+            (r"/leasing/getAdvertComments", AdvertCommentsHandler),
+            (r"/leasing/createAdvertComment", AdvertCommentsHandler)
         ]
         settings = dict(
             debug=True,
