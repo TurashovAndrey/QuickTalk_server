@@ -15,7 +15,6 @@ class AdvertHandler(BaseHandler):
         response['title'] = advert.title
         response['created_by'] = str(user.username)
         response['status_id'] = advert.status_id
-        response['sub_category_id'] = advert.sub_category_id
         response['price'] = advert.price
 
         self.write(response)
@@ -26,14 +25,12 @@ class AdvertHandler(BaseHandler):
         description = get_json_argument(self.request.body, 'description', None)
         type_id = get_json_argument(self.request.body, 'type_id', None)
         group_id = get_json_argument(self.request.body, 'group_id', None)
-        sub_category_id = get_json_argument(self.request.body, 'sub_category_id', None)
         price = get_json_argument(self.request.body, 'price', None)
 
         AdvertModel().create_advert(title = title,
                                     description = description,
                                     type_id = type_id,
                                     group_id = group_id,
-                                    sub_category_id = sub_category_id,
                                     user_id = self.session['user_id'],
                                     price = price)
 
@@ -56,20 +53,20 @@ class AdvertCategoriesHandler(BaseHandler):
 
         self.write({"categories":response})
 
-class AdvertSubCategoriesHandler(BaseHandler):
+class AdvertTypesHandler(BaseHandler):
     def get(self):
         category_id = self.get_argument('category_id', None)
-        sub_categories = AdvertModel().get_advert_sub_categories(category_id)
+        advert_types = AdvertModel().get_advert_types(category_id)
         response = []
 
-        for sub_category in sub_categories:
-            sub_cat = dict()
-            sub_cat['id'] = sub_category.id
-            sub_cat['category_id'] = sub_category.category_id
-            sub_cat['name'] = sub_category.sub_category_name
+        for advert_type in advert_types:
+            advert_type_dict = dict()
+            advert_type_dict['id'] = advert_type.id
+            advert_type_dict['category_id'] = advert_type.category_id
+            advert_type_dict['name'] = advert_type.type_name
 
-            response.append(sub_cat)
+            response.append(advert_type_dict)
 
-        self.write({"sub_categories":response})
+        self.write({"types":response})
 
 

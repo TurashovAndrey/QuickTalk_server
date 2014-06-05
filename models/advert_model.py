@@ -17,7 +17,6 @@ class AdvertModel(Database):
         advert.type_id = int(kw['type_id'])
         advert.group_id = int(kw['group_id'])
         advert.created_by = kw['user_id']
-        advert.sub_category_id = int(kw['sub_category_id'])
         advert.price = float(kw['price'])
         advert.status_id = 1
 
@@ -31,7 +30,6 @@ class AdvertModel(Database):
         advert.type_id = int(kw['type_id'])
         advert.group_id = int(kw['group_id'])
         advert.created_by = kw['user_id']
-        advert.sub_category_id = int(kw['sub_category_id'])
         advert.price = float(kw['price'])
         advert.status_id = 1
         self.store.commit()
@@ -43,6 +41,6 @@ class AdvertModel(Database):
         categories = self.store.find(AdvertCategories)
         return categories
 
-    def get_advert_sub_categories(self, category_id):
-        sub_categories = self.store.find(AdvertSubCategories, AdvertSubCategories.category_id == int(category_id))
-        return sub_categories
+    def get_advert_types(self, category_id):
+        advert_types = self.store.find(AdvertTypes, AdvertTypes.category_id == int(category_id))
+        return advert_types

@@ -40,7 +40,6 @@ class Advert(object):
     status_id = Int()
     created_by = UUID()
     updated_by = UUID()
-    sub_category_id = Int()
     price = Float()
 
 class AdvertLocations(object):
@@ -96,12 +95,6 @@ class UserComment(object):
     user_id = UUID()
     from_user_id = UUID()
     description = Unicode()
-
-class AdvertSubCategories(object):
-    __storm_table__ = "leasing_advert_sub_categories"
-    id = Int(primary=True)
-    category_id = Int()
-    sub_category_name = Unicode()
 
 class AdvertComment(object):
     __storm_table__ = "leasing_advert_comment"
