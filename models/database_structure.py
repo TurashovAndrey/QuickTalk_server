@@ -27,8 +27,6 @@ class AdvertTypes(object):
     id = Int(primary=True)
     category_id = Int()
     type_name = Unicode()
-    url = Unicode()
-    order_num = Int()
 
 class Advert(object):
     __storm_table__ = "leasing_advert"

@@ -5,6 +5,7 @@ from base_handler import is_authenticated
 
 
 class AdvertHandler(BaseHandler):
+    @is_authenticated
     def get(self):
         advert_id = self.get_argument('advert_id', None)
         advert,user = AdvertModel().get_advert(advert_id)
@@ -54,6 +55,7 @@ class AdvertCategoriesHandler(BaseHandler):
         self.write({"categories":response})
 
 class AdvertTypesHandler(BaseHandler):
+    @is_authenticated
     def get(self):
         category_id = self.get_argument('category_id', None)
         advert_types = AdvertModel().get_advert_types(category_id)
