@@ -44,3 +44,8 @@ class AdvertModel(Database):
     def get_advert_types(self, category_id):
         advert_types = self.store.find(AdvertTypes, AdvertTypes.category_id == int(category_id))
         return advert_types
+
+    def get_adverts_by_type(self, type_id):
+        adverts = self.store.using(Advert,Join(User, Advert.created_by== User.user_id)).find((Advert,User), Advert.type_id == int(type_id))
+        return adverts
+

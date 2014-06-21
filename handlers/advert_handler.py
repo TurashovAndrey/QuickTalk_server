@@ -5,7 +5,6 @@ from base_handler import is_authenticated
 
 
 class AdvertHandler(BaseHandler):
-    @is_authenticated
     def get(self):
         advert_id = self.get_argument('advert_id', None)
         advert,user = AdvertModel().get_advert(advert_id)
@@ -55,7 +54,6 @@ class AdvertCategoriesHandler(BaseHandler):
         self.write({"categories":response})
 
 class AdvertTypesHandler(BaseHandler):
-    @is_authenticated
     def get(self):
         category_id = self.get_argument('category_id', None)
         advert_types = AdvertModel().get_advert_types(category_id)
@@ -71,4 +69,22 @@ class AdvertTypesHandler(BaseHandler):
 
         self.write({"types":response})
 
+class AdvertsHandler(BaseHandler):
+    def get(self):
+        type_id = self.get_argument('type_id', None)
+        adverts = AdvertModel().get_adverts_by_type(type_id)
+
+        response = []
+        for advert,user in adverts:
+            advert_dict = dict()
+            advert_dict['advert_id'] = str(advert.advert_id)
+            advert_dict['description'] = advert.description
+            advert_dict['title'] = advert.title
+            advert_dict['created_by'] = str(user.username)
+            advert_dict['status_id'] = advert.status_id
+            advert_dict['price'] = advert.price
+
+            response.append(advert_dict)
+
+        self.write({"adverts": response})
 

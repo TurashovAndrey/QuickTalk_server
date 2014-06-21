@@ -1,7 +1,7 @@
 import tornado.web
 from handlers.test_handler import TestHandler
 from handlers.login_handler import SignUpHandler, LoginHandler, LogoutHandler, ProfileHandler
-from handlers.advert_handler import AdvertHandler, AdvertCategoriesHandler, AdvertTypesHandler
+from handlers.advert_handler import AdvertHandler, AdvertCategoriesHandler, AdvertTypesHandler, AdvertsHandler
 from handlers.advert_comments_handler import AdvertCommentsHandler
 from handlers.user_comments_handler import UserCommentsHandler
 from handlers.request_handler import RequestHandler
@@ -17,6 +17,7 @@ class Application(tornado.web.Application):
             (r"/leasing/login", LoginHandler),
             (r"/leasing/logout", LogoutHandler),
             (r"/leasing/updateProfile", ProfileHandler),
+            (r"/leasing/getAdverts", AdvertsHandler),
             (r"/leasing/getAdvert", AdvertHandler),
             (r"/leasing/createAdvert", AdvertHandler),
             (r"/leasing/getCategories", AdvertCategoriesHandler),
