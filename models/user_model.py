@@ -4,8 +4,12 @@ import uuid
 import bcrypt
 
 class UserModel(Database):
-    def get_user(self, email):
-        user = self.store.find(User, User.email == email).one()
+    def get_user(self, email=None, user_id=None ):
+        if email:
+            user = self.store.find(User, User.email == email).one()
+        elif user_id:
+            user = self.store.find(User, User.user_id == user_id).one()
+
         return user
 
     def create_user(self, **kw):

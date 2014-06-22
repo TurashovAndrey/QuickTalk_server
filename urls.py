@@ -16,6 +16,7 @@ class Application(tornado.web.Application):
             (r"/leasing/signup", SignUpHandler),
             (r"/leasing/login", LoginHandler),
             (r"/leasing/logout", LogoutHandler),
+            (r"/leasing/getProfile", ProfileHandler),
             (r"/leasing/updateProfile", ProfileHandler),
             (r"/leasing/getAdverts", AdvertsHandler),
             (r"/leasing/getAdvert", AdvertHandler),

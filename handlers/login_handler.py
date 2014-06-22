@@ -86,6 +86,21 @@ class LogoutHandler(BaseHandler):
             self.write_exception(e)
 
 class ProfileHandler(BaseHandler):
+    def get(self):
+        try:
+            user = UserModel().get_user(user_id=self.session['user'])
+            response = dict()
+            response['user_id'] = str(user.user_id)
+            response['username'] = user.username
+            response['first_name'] = user.first_name
+            response['last_name'] = user.last_name
+            response['email'] = user.email
+            response['telephone'] = user.telephone
+
+            self.write(response)
+        except Exception, e:
+            self.write_exception(e)
+
     def post(self):
         try:
             response = dict()
@@ -105,6 +120,5 @@ class ProfileHandler(BaseHandler):
 
         except Exception, e:
             self.write_exception(e)
-            self.finish()
 
 
