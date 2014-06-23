@@ -72,7 +72,13 @@ class AdvertTypesHandler(BaseHandler):
 class AdvertsHandler(BaseHandler):
     def get(self):
         type_id = self.get_argument('type_id', None)
-        adverts = AdvertModel().get_adverts_by_type(type_id)
+        user_id = self.get_argument('user_id', None)
+        if type_id:
+            adverts = AdvertModel().get_adverts_by_type(type_id)
+        elif user_id:
+            adverts = AdvertModel().get_adverts_by_user_id(user_id)
+        else:
+            adverts = AdvertModel().get_adverts()
 
         response = []
         for advert,user in adverts:

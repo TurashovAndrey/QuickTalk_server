@@ -49,3 +49,10 @@ class AdvertModel(Database):
         adverts = self.store.using(Advert,Join(User, Advert.created_by== User.user_id)).find((Advert,User), Advert.type_id == int(type_id))
         return adverts
 
+    def get_adverts_by_user_id(self, user_id):
+        adverts = self.store.using(Advert,Join(User, Advert.created_by == User.user_id)).find((Advert,User), Advert.created_by == verify_uuid(user_id))
+        return adverts
+
+    def get_adverts(self):
+        adverts = self.store.using(Advert,Join(User, Advert.created_by== User.user_id)).find((Advert,User))
+        return adverts

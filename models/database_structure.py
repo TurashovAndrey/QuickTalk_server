@@ -100,3 +100,9 @@ class AdvertComment(object):
     advert_id = UUID()
     from_user_id = UUID()
     description = Unicode()
+
+class City(object):
+    __storm_table__ = "leasing_city"
+    id = Int(primary=True)
+    city_name = Unicode()
+    country_id = Int()
