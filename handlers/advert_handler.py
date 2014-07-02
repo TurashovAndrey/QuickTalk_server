@@ -21,23 +21,25 @@ class AdvertHandler(BaseHandler):
 
     @is_authenticated
     def post(self):
-        title = get_json_argument(self.request.body, 'title', None)
-        description = get_json_argument(self.request.body, 'description', None)
-        type_id = get_json_argument(self.request.body, 'type_id', None)
-        group_id = get_json_argument(self.request.body, 'group_id', None)
-        price = get_json_argument(self.request.body, 'price', None)
+        try:
+            title = get_json_argument(self.request.body, 'title', None)
+            description = get_json_argument(self.request.body, 'description', None)
+            type_id = get_json_argument(self.request.body, 'type_id', None)
+            #group_id = get_json_argument(self.request.body, 'group_id', None)
+            price = get_json_argument(self.request.body, 'price', None)
 
-        AdvertModel().create_advert(title = title,
-                                    description = description,
-                                    type_id = type_id,
-                                    group_id = group_id,
-                                    user_id = self.session['user_id'],
-                                    price = price)
+            AdvertModel().create_advert(title = title,
+                                        description = description,
+                                        type_id = type_id,
+                                        #group_id = group_id,
+                                        user_id = self.session['user_id'],
+                                        price = price)
 
-        response = dict()
-        response.update(success={'code': 1})
-        self.write(response)
-
+            response = dict()
+            response.update(success={'code': 1})
+            self.write(response)
+        except Exception, e:
+            self.write_exception(e.message)
 
 class AdvertCategoriesHandler(BaseHandler):
     def get(self):
@@ -73,10 +75,13 @@ class AdvertsHandler(BaseHandler):
     def get(self):
         type_id = self.get_argument('type_id', None)
         user_id = self.get_argument('user_id', None)
+        city_id = self.get_argument('city_id', None)
         if type_id:
             adverts = AdvertModel().get_adverts_by_type(type_id)
         elif user_id:
             adverts = AdvertModel().get_adverts_by_user_id(user_id)
+        elif city_id:
+            adverts = AdvertModel().get_adverts_by_city_id(city_id)
         else:
             adverts = AdvertModel().get_adverts()
 

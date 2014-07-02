@@ -15,7 +15,7 @@ class AdvertModel(Database):
         advert.title = kw['title']
         advert.description = kw['description']
         advert.type_id = int(kw['type_id'])
-        advert.group_id = int(kw['group_id'])
+        #advert.group_id = int(kw['group_id'])
         advert.created_by = kw['user_id']
         advert.price = float(kw['price'])
         advert.status_id = 1
@@ -54,5 +54,9 @@ class AdvertModel(Database):
         return adverts
 
     def get_adverts(self):
-        adverts = self.store.using(Advert,Join(User, Advert.created_by== User.user_id)).find((Advert,User))
+        adverts = self.store.using(Advert,Join(User, Advert.created_by == User.user_id)).find((Advert,User))
+        return adverts
+
+    def get_adverts_by_city_id(self, city_id):
+        adverts = self.store.using(Advert,Join(User, Advert.created_by== User.user_id)).find((Advert,User), Advert.city_id == int(city_id))
         return adverts

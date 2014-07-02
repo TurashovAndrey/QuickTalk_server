@@ -59,12 +59,12 @@ class LoginHandler(BaseHandler):
             sid = self.session.sessionid
             session = Session(self.application.session_store, sid)
             session['username'] = user.username
-            session['user'] = user.user_id
+            session['user_id'] = user.user_id
             session['first_name'] = user.first_name
             session['last_name'] = user.last_name
             self.set_secure_cookie('sid', sid, expires_days=30, domain="fahlo.loc")
             response['token'] = unicode(user.user_id)
-
+            response['username'] = unicode(user.email)
             self.write(response)
 
         except Exception, e:

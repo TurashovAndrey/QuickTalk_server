@@ -39,6 +39,7 @@ class Advert(object):
     created_by = UUID()
     updated_by = UUID()
     price = Float()
+    city_id = Int()
 
 class AdvertLocations(object):
     __storm_table__ = "leasing_advert_locations"
