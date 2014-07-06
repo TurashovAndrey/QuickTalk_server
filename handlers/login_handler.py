@@ -1,7 +1,6 @@
 from base_handler import BaseHandler
 from helpers.helper_functions import *
-from models.user_model import UserModel
-from models.database_structure import *
+from Leasing.models.user_model import UserModel
 import uuid
 import arrow
 import bcrypt
@@ -88,7 +87,7 @@ class LogoutHandler(BaseHandler):
 class ProfileHandler(BaseHandler):
     def get(self):
         try:
-            user = UserModel().get_user(user_id=self.session['user'])
+            user = UserModel().get_user(user_id=self.session['user_id'])
             response = dict()
             response['user_id'] = str(user.user_id)
             response['username'] = user.username

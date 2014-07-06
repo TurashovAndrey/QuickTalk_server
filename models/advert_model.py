@@ -60,3 +60,7 @@ class AdvertModel(Database):
     def get_adverts_by_city_id(self, city_id):
         adverts = self.store.using(Advert,Join(User, Advert.created_by== User.user_id)).find((Advert,User), Advert.city_id == int(city_id))
         return adverts
+
+    def get_adverts_by_keyword(self, keyword):
+        adverts = self.store.using(Advert,Join(User, Advert.created_by == User.user_id)).find((Advert,User), Advert.title.like(u"%{keyword}%".format(keyword=keyword)))
+        return adverts

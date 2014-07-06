@@ -76,12 +76,15 @@ class AdvertsHandler(BaseHandler):
         type_id = self.get_argument('type_id', None)
         user_id = self.get_argument('user_id', None)
         city_id = self.get_argument('city_id', None)
+        keyword = self.get_argument('keyword', None)
         if type_id:
             adverts = AdvertModel().get_adverts_by_type(type_id)
         elif user_id:
             adverts = AdvertModel().get_adverts_by_user_id(user_id)
         elif city_id:
             adverts = AdvertModel().get_adverts_by_city_id(city_id)
+        elif keyword:
+            adverts = AdvertModel().get_adverts_by_keyword(keyword)
         else:
             adverts = AdvertModel().get_adverts()
 
