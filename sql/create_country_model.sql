@@ -1,11 +1,11 @@
-CREATE TABLE leasing_country
+CREATE TABLE job_country
 (
   id serial NOT NULL,
   country_name character varying(32) DEFAULT NULL::character varying,
-  CONSTRAINT leasing_country_id_pkey PRIMARY KEY (id)
+  CONSTRAINT job_country_id_pkey PRIMARY KEY (id)
 )
 WITH (
   OIDS=FALSE
 );
-ALTER TABLE leasing_country
-  OWNER TO leasing;
+ALTER TABLE job_country
+  OWNER TO job;

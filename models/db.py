@@ -14,7 +14,7 @@ class Database():
 
     def getDB(self):
         self.database = create_database("postgres://%s:%s@%s/%s?isolation=read-committed" % (
-                "leasing", "1234567","127.0.0.1", "leasing_db")
+                "job", "1234567","127.0.0.1", "job_db")
         )
         _store = Store(self.database)
         return _store

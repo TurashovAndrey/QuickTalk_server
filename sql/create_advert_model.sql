@@ -1,4 +1,4 @@
-CREATE TABLE leasing_advert
+CREATE TABLE job_advert
 (
   id serial NOT NULL,
   advert_id character varying(64) NOT NULL,
@@ -9,163 +9,163 @@ CREATE TABLE leasing_advert
   created_by character varying(64) NOT NULL,
   updated_by character varying(64),
   status_id integer NOT NULL,
-  CONSTRAINT leasing_advert_pkey PRIMARY KEY (id)
+  CONSTRAINT job_advert_pkey PRIMARY KEY (id)
 )
 WITH (
   OIDS=FALSE
 );
 
-ALTER TABLE leasing_advert
-  OWNER TO leasing;
+ALTER TABLE job_advert
+  OWNER TO job;
 
-CREATE UNIQUE INDEX leasing_advert_advert_id_idx ON leasing_advert(advert_id);
+CREATE UNIQUE INDEX job_advert_advert_id_idx ON job_advert(advert_id);
 
 -- advert locations table
-CREATE TABLE leasing_advert_locations
+CREATE TABLE job_advert_locations
 (
   id serial NOT NULL,
   advert_id character varying(64) NOT NULL,
   location VARCHAR(255),
-  CONSTRAINT leasing_advert_locations_pkey PRIMARY KEY (id)
+  CONSTRAINT job_advert_locations_pkey PRIMARY KEY (id)
 )
 WITH (
   OIDS=FALSE
 );
 
-ALTER TABLE leasing_advert_locations
-  OWNER TO leasing;
+ALTER TABLE job_advert_locations
+  OWNER TO job;
 
-CREATE TABLE leasing_advert_groups
+CREATE TABLE job_advert_groups
 (
   id serial NOT NULL,
   advert_id character varying(64) NOT NULL,
   group_id integer NOT NULL,
-  CONSTRAINT leasing_advert_groups_pkey PRIMARY KEY (id)
+  CONSTRAINT job_advert_groups_pkey PRIMARY KEY (id)
 )
 WITH (
   OIDS=FALSE
 );
 
-ALTER TABLE leasing_advert_groups
-  OWNER TO leasing;
+ALTER TABLE job_advert_groups
+  OWNER TO job;
 
-CREATE TABLE leasing_advert_user_groups
+CREATE TABLE job_advert_user_groups
 (
   id serial NOT NULL,
   advert_id character varying(64) NOT NULL,
   group_id integer NOT NULL,
   user_id character varying(64) NOT NULL,
-  CONSTRAINT leasing_advert_user_groups_pkey PRIMARY KEY (id)
+  CONSTRAINT job_advert_user_groups_pkey PRIMARY KEY (id)
 )
 WITH (
   OIDS=FALSE
 );
 
-ALTER TABLE leasing_advert_user_groups
-  OWNER TO leasing;
+ALTER TABLE job_advert_user_groups
+  OWNER TO job;
 
-CREATE TABLE leasing_statuses
+CREATE TABLE job_statuses
 (
   id serial NOT NULL,
   status VARCHAR(255),
-  CONSTRAINT leasing_statuses_pkey PRIMARY KEY (id)
+  CONSTRAINT job_statuses_pkey PRIMARY KEY (id)
 )
 WITH (
   OIDS=FALSE
 );
 
-ALTER TABLE leasing_statuses
-  OWNER TO leasing;
+ALTER TABLE job_statuses
+  OWNER TO job;
 
-CREATE TABLE leasing_advert_statuses
+CREATE TABLE job_advert_statuses
 (
   id serial NOT NULL,
   advert_id integer NOT NULL,
   status_id integer NOT NULL,
-  CONSTRAINT leasing_advert_statuses_pkey PRIMARY KEY (id),
-  CONSTRAINT leasing_advert_status_id_fkey FOREIGN KEY (status_id)
-      REFERENCES leasing_statuses (id) MATCH SIMPLE
+  CONSTRAINT job_advert_statuses_pkey PRIMARY KEY (id),
+  CONSTRAINT job_advert_status_id_fkey FOREIGN KEY (status_id)
+      REFERENCES job_statuses (id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 )
 WITH (
   OIDS=FALSE
 );
-ALTER TABLE leasing_advert_statuses
-  OWNER TO leasing;
+ALTER TABLE job_advert_statuses
+  OWNER TO job;
 
-CREATE TABLE leasing_group
+CREATE TABLE job_group
 (
   id serial NOT NULL,
   group_name character varying(255) NOT NULL,
-  CONSTRAINT leasing_group_pkey PRIMARY KEY (id)
+  CONSTRAINT job_group_pkey PRIMARY KEY (id)
 )
 WITH (
   OIDS=FALSE
 );
 
-ALTER TABLE leasing_group
-  OWNER TO leasing;
+ALTER TABLE job_group
+  OWNER TO job;
 
-CREATE TABLE leasing_advert_types
+CREATE TABLE job_advert_types
 (
   id serial NOT NULL,
   category_id integer NOT NULL,
   type_name VARCHAR(255),
-  CONSTRAINT leasing_advert_types_pkey PRIMARY KEY (id)
+  CONSTRAINT job_advert_types_pkey PRIMARY KEY (id)
 )
 WITH (
   OIDS=FALSE
 );
 
-ALTER TABLE leasing_advert_types
-  OWNER TO leasing;
+ALTER TABLE job_advert_types
+  OWNER TO job;
 
-CREATE TABLE leasing_advert_categories
+CREATE TABLE job_advert_categories
 (
   id serial NOT NULL,
   category_name VARCHAR(255),
-  CONSTRAINT leasing_advert_categories_pkey PRIMARY KEY (id)
+  CONSTRAINT job_advert_categories_pkey PRIMARY KEY (id)
 )
 WITH (
   OIDS=FALSE
 );
 
-ALTER TABLE leasing_advert_categories
-  OWNER TO leasing;
+ALTER TABLE job_advert_categories
+  OWNER TO job;
 
-ALTER TABLE leasing_advert_types
-    ADD CONSTRAINT leasing_advert_types_category_id_fkey FOREIGN KEY (category_id) REFERENCES leasing_advert_categories(id);
+ALTER TABLE job_advert_types
+    ADD CONSTRAINT job_advert_types_category_id_fkey FOREIGN KEY (category_id) REFERENCES job_advert_categories(id);
 
-ALTER TABLE leasing_advert
-    ADD CONSTRAINT leasing_advert_type_id_fkey FOREIGN KEY (type_id) REFERENCES leasing_advert_types(id);
+ALTER TABLE job_advert
+    ADD CONSTRAINT job_advert_type_id_fkey FOREIGN KEY (type_id) REFERENCES job_advert_types(id);
 
-ALTER TABLE leasing_advert
-    ADD CONSTRAINT leasing_advert_group_id_fkey FOREIGN KEY (group_id) REFERENCES leasing_group(id);
+ALTER TABLE job_advert
+    ADD CONSTRAINT job_advert_group_id_fkey FOREIGN KEY (group_id) REFERENCES job_group(id);
 
-ALTER TABLE leasing_advert
-    ADD CONSTRAINT leasing_advert_created_by_fkey FOREIGN KEY (created_by) REFERENCES leasing_user(user_id);
+ALTER TABLE job_advert
+    ADD CONSTRAINT job_advert_created_by_fkey FOREIGN KEY (created_by) REFERENCES job_user(user_id);
 
-ALTER TABLE leasing_advert
-    ADD CONSTRAINT leasing_advert_updated_by_fkey FOREIGN KEY (updated_by) REFERENCES leasing_user(user_id);
+ALTER TABLE job_advert
+    ADD CONSTRAINT job_advert_updated_by_fkey FOREIGN KEY (updated_by) REFERENCES job_user(user_id);
 
-ALTER TABLE leasing_advert
-    ADD CONSTRAINT leasing_advert_status_id_fkey FOREIGN KEY (status_id) REFERENCES leasing_statuses(id);
+ALTER TABLE job_advert
+    ADD CONSTRAINT job_advert_status_id_fkey FOREIGN KEY (status_id) REFERENCES job_statuses(id);
 
-ALTER TABLE leasing_advert_locations
-    ADD CONSTRAINT leasing_advert_locations_advert_id_fkey FOREIGN KEY (advert_id) REFERENCES leasing_advert(advert_id);
+ALTER TABLE job_advert_locations
+    ADD CONSTRAINT job_advert_locations_advert_id_fkey FOREIGN KEY (advert_id) REFERENCES job_advert(advert_id);
 
-ALTER TABLE leasing_advert_groups
-    ADD CONSTRAINT leasing_advert_groups_group_id_fkey FOREIGN KEY (group_id) REFERENCES leasing_group(id);
+ALTER TABLE job_advert_groups
+    ADD CONSTRAINT job_advert_groups_group_id_fkey FOREIGN KEY (group_id) REFERENCES job_group(id);
 
-ALTER TABLE leasing_advert_groups
-    ADD CONSTRAINT leasing_advert_groups_advert_id_fkey FOREIGN KEY (advert_id) REFERENCES leasing_advert(advert_id);
+ALTER TABLE job_advert_groups
+    ADD CONSTRAINT job_advert_groups_advert_id_fkey FOREIGN KEY (advert_id) REFERENCES job_advert(advert_id);
 
-ALTER TABLE leasing_advert_user_groups
-    ADD CONSTRAINT leasing_advert_user_groups_group_id_fkey FOREIGN KEY (group_id) REFERENCES leasing_group(id);
+ALTER TABLE job_advert_user_groups
+    ADD CONSTRAINT job_advert_user_groups_group_id_fkey FOREIGN KEY (group_id) REFERENCES job_group(id);
 
-ALTER TABLE leasing_advert_user_groups
-    ADD CONSTRAINT leasing_advert_user_groups_advert_id_fkey FOREIGN KEY (advert_id) REFERENCES leasing_advert(advert_id);
+ALTER TABLE job_advert_user_groups
+    ADD CONSTRAINT job_advert_user_groups_advert_id_fkey FOREIGN KEY (advert_id) REFERENCES job_advert(advert_id);
 
-ALTER TABLE leasing_advert_user_groups
-    ADD CONSTRAINT leasing_advert_user_groups_user_id_fkey FOREIGN KEY (user_id) REFERENCES leasing_user(user_id);
+ALTER TABLE job_advert_user_groups
+    ADD CONSTRAINT job_advert_user_groups_user_id_fkey FOREIGN KEY (user_id) REFERENCES job_user(user_id);
 

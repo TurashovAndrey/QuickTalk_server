@@ -1,4 +1,4 @@
-CREATE TABLE leasing_user
+CREATE TABLE job_user
 (
   id serial NOT NULL,
   user_id character varying(64) DEFAULT NULL::character varying,
@@ -19,12 +19,12 @@ CREATE TABLE leasing_user
   is_active boolean NOT NULL DEFAULT true,
   is_deleted boolean NOT NULL DEFAULT false,
   telephone character varying,
-  CONSTRAINT leasing_user_pkey PRIMARY KEY (id)
+  CONSTRAINT job_user_pkey PRIMARY KEY (id)
 )
 WITH (
   OIDS=FALSE
 );
-ALTER TABLE leasing_user
-  OWNER TO leasing;
+ALTER TABLE job_user
+  OWNER TO job;
 
-CREATE UNIQUE INDEX leasing_user_user_id_idx ON leasing_user(user_id);
+CREATE UNIQUE INDEX job_user_user_id_idx ON job_user(user_id);

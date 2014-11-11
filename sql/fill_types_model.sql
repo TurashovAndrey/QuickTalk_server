@@ -1,4 +1,4 @@
-insert into leasing_advert_types
+insert into job_advert_types
   (category_id, type_name)
 values
   (2,'Детская одежда'),

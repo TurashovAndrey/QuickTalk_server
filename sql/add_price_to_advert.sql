@@ -1,2 +1,2 @@
-ALTER TABLE leasing_advert
+ALTER TABLE job_advert
   ADD COLUMN price NUMERIC(12,2)

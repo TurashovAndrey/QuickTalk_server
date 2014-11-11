@@ -1,6 +1,6 @@
 from base_handler import BaseHandler
 from helpers.helper_functions import *
-from Leasing.models.user_model import UserModel
+from models.user_model import UserModel
 import uuid
 import arrow
 import bcrypt

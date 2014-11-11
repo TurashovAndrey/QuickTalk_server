@@ -1,4 +1,4 @@
-INSERT INTO leasing_statuses
+INSERT INTO job_statuses
   (status)
 VALUES
 ('Активное'),

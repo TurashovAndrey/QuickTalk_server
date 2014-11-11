@@ -1,4 +1,4 @@
-insert into leasing_advert_categories
+insert into job_advert_categories
   (category_name)
 values
   ('Детский мир'),
