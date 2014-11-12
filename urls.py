@@ -18,16 +18,16 @@ class Application(tornado.web.Application):
             (r"/job/getProfile", ProfileHandler),
             (r"/job/updateProfile", ProfileHandler),
             (r"/job/getAdverts", AdvertsHandler),
-            (r"/job/getAdvert", AdvertHandler),
-            (r"/job/createAdvert", AdvertHandler),
+            (r"/job/getAdvert", CVHandler),
+            (r"/job/createAdvert", CVHandler),
             (r"/job/getCategories", AdvertCategoriesHandler),
             (r"/job/getTypes", AdvertTypesHandler),
             (r"/job/getUserComments", UserCommentsHandler),
             (r"/job/createUserComment", UserCommentsHandler),
             (r"/job/getRequests", RequestHandler),
             (r"/job/createRequest", RequestHandler),
-            (r"/job/getAdvertComments", AdvertCommentsHandler),
-            (r"/job/createAdvertComment", AdvertCommentsHandler),
+            (r"/job/getAdvertComments", CVCommentsHandler),
+            (r"/job/createAdvertComment", CVCommentsHandler),
             (r"/job/getCities", CitiesHandler)
         ]
         settings = dict(
