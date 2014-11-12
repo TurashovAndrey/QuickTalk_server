@@ -14,20 +14,7 @@ class Database():
 
     def getDB(self):
         self.database = create_database("postgres://%s:%s@%s/%s?isolation=read-committed" % (
-                "job", "1234567","127.0.0.1", "job_db")
+                options.db_user, options.db_password, options.db_host, options.db_name)
         )
         _store = Store(self.database)
         return _store
-
-    def fetchAll(self, rows):
-        data = list()
-        for r in rows:
-            d = {}
-            for prop in dir(r):
-                if prop[0] != '_':
-                    d[prop] = getattr(r, prop)
-
-            if len(d.keys()) > 0:
-                data.append(d)
-
-        return data
