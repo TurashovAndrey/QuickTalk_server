@@ -4,7 +4,7 @@ from models.advert_model import AdvertModel
 from base_handler import is_authenticated
 
 
-class AdvertHandler(BaseHandler):
+class CVHandler(BaseHandler):
     def get(self):
         advert_id = self.get_argument('advert_id', None)
         advert,user = AdvertModel().get_advert(advert_id)

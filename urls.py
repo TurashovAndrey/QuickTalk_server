@@ -1,8 +1,7 @@
 import tornado.web
-from handlers.test_handler import TestHandler
 from handlers.login_handler import SignUpHandler, LoginHandler, LogoutHandler, ProfileHandler
-from handlers.advert_handler import AdvertHandler, AdvertCategoriesHandler, AdvertTypesHandler, AdvertsHandler
-from handlers.advert_comments_handler import AdvertCommentsHandler
+from handlers.cv_handler import CVHandler, AdvertCategoriesHandler, AdvertTypesHandler, AdvertsHandler
+from handlers.cv_comments_handler import CVCommentsHandler
 from handlers.cities_handler import CitiesHandler
 from handlers.user_comments_handler import UserCommentsHandler
 from handlers.request_handler import RequestHandler
@@ -13,7 +12,6 @@ from helpers.session import RedisSessionStore
 class Application(tornado.web.Application):
     def __init__(self):
         handlers = [
-            (r"/", TestHandler),
             (r"/job/signup", SignUpHandler),
             (r"/job/login", LoginHandler),
             (r"/job/logout", LogoutHandler),

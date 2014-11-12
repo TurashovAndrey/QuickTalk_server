@@ -3,7 +3,7 @@ from helpers.helper_functions import *
 from models.advert_comments_model import AdvertCommentsModel
 
 
-class AdvertCommentsHandler(BaseHandler):
+class CVCommentsHandler(BaseHandler):
     def get(self):
         try:
             advert_id = self.get_argument('advert_id', None)
