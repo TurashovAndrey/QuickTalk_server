@@ -17,24 +17,21 @@ class Application(tornado.web.Application):
             (r"/job/logout", LogoutHandler),
             (r"/job/getProfile", ProfileHandler),
             (r"/job/updateProfile", ProfileHandler),
-            (r"/job/getAdverts", AdvertsHandler),
-            (r"/job/getAdvert", CVHandler),
-            (r"/job/createAdvert", CVHandler),
-            (r"/job/getCategories", AdvertCategoriesHandler),
-            (r"/job/getTypes", AdvertTypesHandler),
-            (r"/job/getUserComments", UserCommentsHandler),
-            (r"/job/createUserComment", UserCommentsHandler),
+            (r"/job/getUsers", AdvertsHandler),
+            (r"/job/getLiveUsers", AdvertsHandler),
+            (r"/job/getLiveGroups", AdvertsHandler),
+            (r"/job/getUserProfile", CVHandler),
             (r"/job/getRequests", RequestHandler),
             (r"/job/createRequest", RequestHandler),
-            (r"/job/getAdvertComments", CVCommentsHandler),
-            (r"/job/createAdvertComment", CVCommentsHandler),
-            (r"/job/getCities", CitiesHandler)
+            (r"/job/getUserComments", CVCommentsHandler),
+            (r"/job/createUserComment", CVCommentsHandler),
+            (r"/job/getCities", CitiesHandler),
         ]
         settings = dict(
             debug=True,
             login_url="/login",
             cookie_secret="yVJwZeaTRN+RNaFJ8cXVuacVBDsvSEZjqqg9tzaXTI0=",
-            cookie_domain="fahlo.loc"
+            cookie_domain="quicktalk.loc"
         )
 
         tornado.web.Application.__init__(self, handlers, **settings)
