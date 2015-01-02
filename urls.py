@@ -1,6 +1,6 @@
 import tornado.web
 from handlers.login_handler import SignUpHandler, LoginHandler, LogoutHandler, ProfileHandler
-from handlers.cv_handler import CVHandler, AdvertCategoriesHandler, AdvertTypesHandler, AdvertsHandler
+from handlers.cv_handler import CVHandler, AdvertsHandler
 from handlers.cv_comments_handler import CVCommentsHandler
 from handlers.cities_handler import CitiesHandler
 from handlers.request_handler import RequestHandler

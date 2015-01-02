@@ -41,36 +41,6 @@ class CVHandler(BaseHandler):
         except Exception, e:
             self.write_exception(e.message)
 
-class AdvertCategoriesHandler(BaseHandler):
-    def get(self):
-        categories = AdvertModel().get_advert_categories()
-        response = []
-
-        for category in categories:
-            cat = dict()
-            cat['id'] = category.id
-            cat['name'] = category.category_name
-
-            response.append(cat)
-
-        self.write({"categories":response})
-
-class AdvertTypesHandler(BaseHandler):
-    def get(self):
-        category_id = self.get_argument('category_id', None)
-        advert_types = AdvertModel().get_advert_types(category_id)
-        response = []
-
-        for advert_type in advert_types:
-            advert_type_dict = dict()
-            advert_type_dict['id'] = advert_type.id
-            advert_type_dict['category_id'] = advert_type.category_id
-            advert_type_dict['name'] = advert_type.type_name
-
-            response.append(advert_type_dict)
-
-        self.write({"types":response})
-
 class AdvertsHandler(BaseHandler):
     def get(self):
         type_id = self.get_argument('type_id', None)
