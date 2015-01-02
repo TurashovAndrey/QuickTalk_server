@@ -1,4 +1,4 @@
-CREATE TABLE job_user
+CREATE TABLE quicktalk_user
 (
   id serial NOT NULL,
   user_id character varying(64) DEFAULT NULL::character varying,
@@ -19,12 +19,12 @@ CREATE TABLE job_user
   is_active boolean NOT NULL DEFAULT true,
   is_deleted boolean NOT NULL DEFAULT false,
   telephone character varying,
-  CONSTRAINT job_user_pkey PRIMARY KEY (id)
+  CONSTRAINT quicktalk_user_pkey PRIMARY KEY (id)
 )
 WITH (
   OIDS=FALSE
 );
-ALTER TABLE job_user
-  OWNER TO job;
+ALTER TABLE quicktalk_user
+  OWNER TO quicktalk;
 
-CREATE UNIQUE INDEX job_user_user_id_idx ON job_user(user_id);
+CREATE UNIQUE INDEX quicktalk_user_user_id_idx ON quicktalk_user(user_id);
