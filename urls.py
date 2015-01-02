@@ -3,7 +3,6 @@ from handlers.login_handler import SignUpHandler, LoginHandler, LogoutHandler, P
 from handlers.cv_handler import CVHandler, AdvertCategoriesHandler, AdvertTypesHandler, AdvertsHandler
 from handlers.cv_comments_handler import CVCommentsHandler
 from handlers.cities_handler import CitiesHandler
-from handlers.user_comments_handler import UserCommentsHandler
 from handlers.request_handler import RequestHandler
 import redis
 from helpers.session import RedisSessionStore
@@ -16,7 +15,7 @@ class Application(tornado.web.Application):
             (r"/job/login", LoginHandler),
             (r"/job/logout", LogoutHandler),
             (r"/job/profile", ProfileHandler),
-            (r"/job/users", AdvertsHandler),
+            (r"/job/users", LoginHandler),
             (r"/job/getLiveUsers", AdvertsHandler),
             (r"/job/getLiveGroups", AdvertsHandler),
             (r"/job/getUserProfile", CVHandler),
