@@ -1,7 +1,5 @@
 import tornado.web
-from handlers.users_handler import SignUpHandler, LoginHandler, LogoutHandler, ProfileHandler
-from handlers.cv_handler import CVHandler, AdvertsHandler
-from handlers.cv_comments_handler import CVCommentsHandler
+from handlers.users_handler import SignUpHandler, LoginHandler, LogoutHandler, ProfileHandler, UsersHandler
 from handlers.cities_handler import CitiesHandler
 from handlers.request_handler import RequestHandler
 import redis
@@ -16,14 +14,14 @@ class Application(tornado.web.Application):
             (r"/job/logout", LogoutHandler),
             (r"/job/profile", ProfileHandler),
             (r"/job/users", UsersHandler),
-            (r"/job/getLiveUsers", AdvertsHandler),
-            (r"/job/getLiveGroups", AdvertsHandler),
-            (r"/job/getUserProfile", CVHandler),
-            (r"/job/getRequests", RequestHandler),
-            (r"/job/createRequest", RequestHandler),
-            (r"/job/getUserComments", CVCommentsHandler),
-            (r"/job/createUserComment", CVCommentsHandler),
-            (r"/job/getCities", CitiesHandler),
+            (r"/job/getLiveUsers", UsersHandler),
+            (r"/job/getLiveGroups", UsersHandler),
+            (r"/job/getUserProfile", UsersHandler),
+            (r"/job/getRequests", UsersHandler),
+            (r"/job/createRequest", UsersHandler),
+            (r"/job/getUserComments", UsersHandler),
+            (r"/job/createUserComment", UsersHandler),
+            (r"/job/getCities", UsersHandler),
         ]
         settings = dict(
             debug=True,
