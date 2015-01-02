@@ -120,4 +120,16 @@ class ProfileHandler(BaseHandler):
         except Exception, e:
             self.write_exception(e)
 
+class UsersHandler(BaseHandler):
+    def get(self):
+        users = UserModel().get_users()
 
+        response = []
+        for user in users:
+            user_dict = dict()
+            user_dict['user_id'] = str(user.user_id)
+            user_dict['user_name'] = user.user_name
+
+            response.append(user_dict)
+
+        self.write({"users": response})

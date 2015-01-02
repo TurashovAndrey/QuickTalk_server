@@ -1,5 +1,5 @@
 import tornado.web
-from handlers.login_handler import SignUpHandler, LoginHandler, LogoutHandler, ProfileHandler
+from handlers.users_handler import SignUpHandler, LoginHandler, LogoutHandler, ProfileHandler
 from handlers.cv_handler import CVHandler, AdvertsHandler
 from handlers.cv_comments_handler import CVCommentsHandler
 from handlers.cities_handler import CitiesHandler
@@ -15,7 +15,7 @@ class Application(tornado.web.Application):
             (r"/job/login", LoginHandler),
             (r"/job/logout", LogoutHandler),
             (r"/job/profile", ProfileHandler),
-            (r"/job/users", LoginHandler),
+            (r"/job/users", UsersHandler),
             (r"/job/getLiveUsers", AdvertsHandler),
             (r"/job/getLiveGroups", AdvertsHandler),
             (r"/job/getUserProfile", CVHandler),

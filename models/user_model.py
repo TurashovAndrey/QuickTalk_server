@@ -49,3 +49,6 @@ class UserModel(Database):
                 return user
 
         return None
+
+    def get_users(self):
+        return self.store.find(User, User.email == email)
