@@ -16,6 +16,7 @@ class User(object):
     birthday = Date()
     hometown = Unicode()
     telephone = Unicode()
+    is_online = Bool()
 
 class AdvertCategories(object):
     __storm_table__ = "quicktalk_advert_categories"

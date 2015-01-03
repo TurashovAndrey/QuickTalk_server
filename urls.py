@@ -1,7 +1,5 @@
 import tornado.web
-from handlers.users_handler import SignUpHandler, LoginHandler, LogoutHandler, ProfileHandler, UsersHandler
-from handlers.cities_handler import CitiesHandler
-from handlers.request_handler import RequestHandler
+from handlers.users_handler import SignUpHandler, LoginHandler, LogoutHandler, ProfileHandler, UsersHandler, LiveUsersHandler
 import redis
 from helpers.session import RedisSessionStore
 
@@ -14,7 +12,7 @@ class Application(tornado.web.Application):
             (r"/job/logout", LogoutHandler),
             (r"/job/profile", ProfileHandler),
             (r"/job/users", UsersHandler),
-            (r"/job/getLiveUsers", UsersHandler),
+            (r"/job/getLiveUsers", LiveUsersHandler),
             (r"/job/getLiveGroups", UsersHandler),
             (r"/job/getUserProfile", UsersHandler),
             (r"/job/getRequests", UsersHandler),

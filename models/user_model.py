@@ -52,4 +52,7 @@ class UserModel(Database):
         return None
 
     def get_users(self):
-        return self.store.find(User, User.email == email)
+        return self.store.find(User)
+
+    def get_live_users(self):
+        return self.store.find(User, User.is_online == True)
