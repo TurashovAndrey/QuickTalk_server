@@ -1,6 +1,6 @@
 from storm.locals import *
+import settings
 from tornado.options import options
-import storm.database
 
 class Database():
 

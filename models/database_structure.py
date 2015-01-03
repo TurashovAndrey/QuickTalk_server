@@ -1,7 +1,7 @@
 from storm.locals import *
 
 class User(object):
-    __storm_table__ = "job_user"
+    __storm_table__ = "quicktalk_user"
     id = Int(primary=True)
     user_id = UUID()
     username = Unicode()
@@ -18,18 +18,18 @@ class User(object):
     telephone = Unicode()
 
 class AdvertCategories(object):
-    __storm_table__ = "job_advert_categories"
+    __storm_table__ = "quicktalk_advert_categories"
     id = Int(primary=True)
     category_name = Unicode()
 
 class AdvertTypes(object):
-    __storm_table__ = "job_advert_types"
+    __storm_table__ = "quicktalk_advert_types"
     id = Int(primary=True)
     category_id = Int()
     type_name = Unicode()
 
 class Advert(object):
-    __storm_table__ = "job_advert"
+    __storm_table__ = "quicktalk_advert"
     id = Int(primary=True)
     advert_id = UUID()
     title = Unicode()
@@ -42,7 +42,7 @@ class Advert(object):
     city_id = Int()
 
 class AdvertLocations(object):
-    __storm_table__ = "job_advert_locations"
+    __storm_table__ = "quicktalk_advert_locations"
     id = Int(primary=True)
     advert_id = UUID()
     location = Unicode()
@@ -51,31 +51,31 @@ class AdvertLocations(object):
     is_pickup_location = Bool()
 
 class Statuses(object):
-    __storm_table__ = "job_statuses"
+    __storm_table__ = "quicktalk_statuses"
     id = Int(primary=True)
     status = Unicode()
 
 class AdvertGroups(object):
-    __storm_table__ = "job_advert_groups"
+    __storm_table__ = "quicktalk_advert_groups"
     id = Int(primary=True)
     advert_id = UUID()
     group_id = Int()
 
 class AdvertUserGroups(object):
-    __storm_table__ = "job_advert_user_groups"
+    __storm_table__ = "quicktalk_advert_user_groups"
     id = Int(primary=True)
     advert_id = UUID()
     group_id = Int()
     user_id = UUID()
 
 class AdvertItems(object):
-    __storm_table__ = "job_advert_items"
+    __storm_table__ = "quicktalk_advert_items"
     id = Int(primary=True)
     advert_id = UUID()
     item_id = UUID()
 
 class Locations(object):
-    __storm_table__ = "job_locations"
+    __storm_table__ = "quicktalk_locations"
     id = Int(primary=True)
     hub_id = UUID()
     location = Unicode()
@@ -83,27 +83,27 @@ class Locations(object):
     longitude = Decimal()
 
 class Request(object):
-    __storm_table__ = "job_request"
+    __storm_table__ = "quicktalk_request"
     id = Int(primary=True)
     advert_id = UUID()
     request_user_id = UUID()
 
 class UserComment(object):
-    __storm_table__ = "job_user_comment"
+    __storm_table__ = "quicktalk_user_comment"
     id = Int(primary=True)
     user_id = UUID()
     from_user_id = UUID()
     description = Unicode()
 
 class AdvertComment(object):
-    __storm_table__ = "job_advert_comment"
+    __storm_table__ = "quicktalk_advert_comment"
     id = Int(primary=True)
     advert_id = UUID()
     from_user_id = UUID()
     description = Unicode()
 
 class City(object):
-    __storm_table__ = "job_city"
+    __storm_table__ = "quicktalk_city"
     id = Int(primary=True)
     city_name = Unicode()
     country_id = Int()
