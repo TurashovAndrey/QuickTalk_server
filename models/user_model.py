@@ -6,11 +6,11 @@ import bcrypt
 class UserModel(Database):
     def get_user(self, email=None, user_id=None, username=None ):
         if email:
-            user = self.store.find(User, User.email == email).one()
+            user = self.store.find(User, User.email == email).order_by(User.user_id).first()
         elif user_id:
-            user = self.store.find(User, User.user_id == user_id).one()
+            user = self.store.find(User, User.user_id == user_id).order_by(User.user_id).first()
         elif username:
-            user = self.store.find(User, User.username == username).one()
+            user = self.store.find(User, User.username == username).order_by(User.user_id).first()
         return user
 
     def create_user(self, **kw):

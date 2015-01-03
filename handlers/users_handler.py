@@ -45,10 +45,16 @@ class SignUpHandler(BaseHandler):
 
             UserModel().create_user(**user)
 
+            sid = self.session.sessionid
+            session = Session(self.application.session_store, sid)
+            session['username'] = user['username']
+            session['user_id'] = user['user_id']
             response = dict()
-            response.update(success={'code': 1})
-            self.write(response)
+            self.set_secure_cookie('sid', sid, expires_days=30, domain="quicktalk.loc")
+            response['token'] = unicode(user['user_id'])
+            response['username'] = unicode(user['username'])
 
+            self.write(response)
         except Exception, e:
             self.write_exception(e)
 
