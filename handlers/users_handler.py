@@ -12,18 +12,23 @@ class SignUpHandler(BaseHandler):
         try:
             user = dict()
 
+            username = get_json_argument(self.request.body, 'username', None)
             email = get_json_argument(self.request.body, 'email', None)
             password = get_json_argument(self.request.body,'password', None)
 
-            if email is None or password is None:
-                raise Exception('Need username, password to create user.')
+            if not email or not password or not username:
+                raise Exception('Need username, email, password to create user.')
 
             if len(password) < 8:
                 raise Exception('Password must be greater than 8 symbols')
 
             u = UserModel().get_user(email=email)
-            if isinstance(u, UserModel) and u.user_id is not None:
+            if isinstance(u, UserModel) and u.user_id:
                 raise Exception('User with email %s already exists' % email)
+
+            u = UserModel().get_user(username=username)
+            if isinstance(u, UserModel) and u.user_id:
+                raise Exception('User with username %s already exists' % username)
 
             user_id = uuid.uuid4()
             created = arrow.utcnow().timestamp
@@ -32,12 +37,18 @@ class SignUpHandler(BaseHandler):
             hashed = unicode(hashed)
 
             user['user_id'] = user_id
+            user['username'] = username
             user['hashed_pw'] = hashed
             user['email'] = email
             user['created'] = created
             user['updated'] = created
 
             UserModel().create_user(**user)
+
+            response = dict()
+            response.update(success={'code': 1})
+            self.write(response)
+
         except Exception, e:
             self.write_exception(e)
 
