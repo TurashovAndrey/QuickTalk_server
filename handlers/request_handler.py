@@ -6,17 +6,17 @@ from helpers.helper_functions import *
 class RequestHandler(BaseHandler):
     def get(self):
         try:
-            advert_id = self.get_argument('advert_id', None)
-            adverts = RequestModel().get_requests(advert_id)
+            user_id = self.get_argument('user_id', None)
+            users = RequestModel().get_requests(user_id)
             response = []
 
-            for advert in adverts:
-                adv = dict()
-                adv['id'] = advert.id
-                adv['request_user_id'] = str(advert.request_user_id)
-                adv['advert_id'] = str(advert.advert_id)
+            for user in users:
+                user = dict()
+                user['id'] = user.id
+                user['request_user_id'] = str(user.request_user_id)
+                user['advert_id'] = str(user.advert_id)
 
-                response.append(adv)
+                response.append(user)
 
             self.write({"requests":response})
 
